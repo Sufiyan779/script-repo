@@ -4,6 +4,8 @@ sudo apt-get install docker.io -y
 sudo usermod -aG docker $USER
 sudo chmod 777 /var/run/docker.sock
 
+git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
+cd learn-terraform-provision-eks-cluster
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.6/2023-10-17/bin/linux/amd64/kubectl
 sudo chmod +x ./kubectl
 sudo mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
