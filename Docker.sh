@@ -4,11 +4,17 @@ sudo apt-get install docker.io -y
 sudo usermod -aG docker $USER
 sudo chmod 777 /var/run/docker.sock
 
-git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
-cd learn-terraform-provision-eks-cluster
+wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+sudo apt update && sudo apt install terraform -y
+
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.6/2023-10-17/bin/linux/amd64/kubectl
 sudo chmod +x ./kubectl
 sudo mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$HOME/bin:$PATH
+
+git clone https://github.com/hashicorp/learn-terraform-provision-eks-cluster
+cd learn-terraform-provision-eks-cluster
+terraform apply -auto-approve
 
 
 #aws-cli
